@@ -13,7 +13,7 @@ provider azurerm {
 }
 # Create virtual network
 resource "azurerm_virtual_network" "donnyvnet" {
-    name                = "donnyvnet"
+    name                = "donnyvnet-02"
     address_space       = ["10.0.0.0/16"]
     location            = "australiasoutheast"
     resource_group_name = "donnylab-rg"
