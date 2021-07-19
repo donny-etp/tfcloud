@@ -15,7 +15,7 @@ provider azurerm {
 resource "azurerm_virtual_network" "donnyvnet" {
     name                = "donnyvnet"
     address_space       = ["10.0.0.0/16"]
-    location            = "australiasoutheast"
+    location            = "australiaeast"
     resource_group_name = "donnylab-rg"
 
     tags = {
@@ -40,7 +40,7 @@ resource "azurerm_subnet" "donnysubnet02" {
 #Deploy Public IP
 resource "azurerm_public_ip" "donnypip1" {
   name                = "donnypip1"
-  location            = "australiasoutheast"
+  location            = "australiaeast"
   resource_group_name = azurerm_virtual_network.donnyvnet.resource_group_name
   allocation_method   = "Dynamic"
   sku                 = "Basic"
@@ -49,7 +49,7 @@ resource "azurerm_public_ip" "donnypip1" {
 #Create NIC
 resource "azurerm_network_interface" "donnynic" {
   name                = "donnyvm01-nic"  
-  location            = "australiasoutheast"
+  location            = "australiaeast"
   resource_group_name = azurerm_virtual_network.donnyvnet.resource_group_name
 
     ip_configuration {
@@ -64,7 +64,7 @@ resource "azurerm_network_interface" "donnynic" {
  resource "azurerm_storage_account" "sa" {
   name                     = "donnyvmdiagsto" 
   resource_group_name      = azurerm_virtual_network.donnyvnet.resource_group_name
-  location                 = "australiasoutheast"
+  location                 = "australiaeast"
    account_tier            = "Standard"
    account_replication_type = "LRS"
 
@@ -75,9 +75,9 @@ resource "azurerm_network_interface" "donnynic" {
   }
 
 #Create Virtual Machine
-resource "azurerm_virtual_machine" "donnyv01" {
+resource "azurerm_virtual_machine" "donnyvm01" {
   name                  = "donnyvm01"  
-  location              = "australiasoutheast"
+  location              = "australiaeast"
   resource_group_name   = azurerm_virtual_network.donnyvnet.resource_group_name
   network_interface_ids = [azurerm_network_interface.donnynic.id]
   vm_size               = "Standard_B1s"
