@@ -1,8 +1,16 @@
+
+terraform {
+  required_providers {
+    azurerm = {
+      source = "hashicorp/azurerm"
+      version = "2.68.0"
+    }
+  }
+}
 provider azurerm {
     version = "=2.52.0"
     features {}
 }
-
 # Create virtual network
 resource "azurerm_virtual_network" "donnyvnet" {
     name                = "donnyvnet"
